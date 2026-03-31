@@ -68,6 +68,16 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
+        /* Countdown Style */
+        #timer {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 600;
+            margin: 20px 0;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+
         .password-wrapper {
             position: relative;
             width: 100%;
@@ -112,7 +122,7 @@
 
         button:active { transform: scale(0.98); }
 
-        #content, #photoSection, #finalMessage { 
+        #countdownSection, #loginSection, #content, #photoSection, #finalMessage { 
             display: none; 
             animation: fadeIn 1.2s ease forwards; 
         }
@@ -173,7 +183,7 @@
             font-size: 1.1rem;
             line-height: 1.8;
             text-align: left;
-            white-space: pre-line; /* Keeps your line breaks */
+            white-space: pre-line;
         }
     </style>
 </head>
@@ -186,6 +196,15 @@
 
     <div class="container" id="mainCard">
         
+        <!-- COUNTDOWN SECTION -->
+        <div id="countdownSection">
+            <div style="font-size: 60px;">🔒</div>
+            <h1>Not Yet, Caterpillar...</h1>
+            <p style="color: white; font-size: 0.9rem;">Your surprise unfolds in:</p>
+            <div id="timer">00:00:00:00</div>
+            <p style="color: white; font-size: 0.8rem; opacity: 0.8;">Wait for the clock to hit midnight! ❤️</p>
+        </div>
+
         <!-- LOGIN SECTION -->
         <div id="loginSection">
             <div style="font-size: 60px;">🐛</div>
@@ -250,6 +269,33 @@
     </div>
 
     <script>
+        // SET THE TARGET DATE HERE (Month Day, Year Hour:Minute:Second)
+        const targetDate = new Date("April 1, 2026 00:00:00").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display timer
+            if (document.getElementById("timer")) {
+                document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            }
+
+            // If countdown is finished, show login
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("countdownSection").style.display = "none";
+                document.getElementById("loginSection").style.display = "block";
+            } else {
+                document.getElementById("countdownSection").style.display = "block";
+            }
+        }, 1000);
+
         function toggleVisibility() {
             const passInput = document.getElementById('passInput');
             const toggleBtn = document.getElementById('toggleBtn');
@@ -288,7 +334,6 @@
         function showFinalMessage() {
             document.getElementById('photoSection').style.display = "none";
             document.getElementById('finalMessage').style.display = "block";
-            // Shrink the card back down for a more intimate letter feel
             document.getElementById('mainCard').classList.remove('expanded');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
