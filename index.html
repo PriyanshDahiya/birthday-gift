@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For my Caterpillar 🐛</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ff758c;
+            --secondary: #ff7eb3;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            transition: background 1.5s ease;
+        }
+
+        .floating {
+            position: fixed;
+            user-select: none;
+            z-index: 0;
+            animation: float 12s infinite linear;
+            opacity: 0.5;
+            font-size: 2rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); }
+            100% { transform: translateY(-10vh) rotate(360deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 20px;
+        }
+
+        .container.expanded {
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: white;
+            font-size: 2.5rem;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
+            outline: none;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        button {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.3);
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        button:active { transform: scale(0.98); }
+
+        #content, #photoSection, #finalMessage { 
+            display: none; 
+            animation: fadeIn 1.2s ease forwards; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            color: #fff;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.6;
+        }
+
+        audio { width: 100%; margin-top: 10px; border-radius: 30px; }
+
+        .error { color: #fff; background: rgba(255, 0, 0, 0.3); font-size: 0.8rem; padding: 5px; border-radius: 5px; margin-bottom: 10px; display: none; }
+
+        .photo-card {
+            background: white;
+            padding: 12px;
+            padding-bottom: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+        }
+        .photo-card:nth-child(even) { transform: rotate(2deg); }
+
+        .photo-card img {
+            width: 100%;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: #444;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #ff758c;
+            margin-top: 20px;
+        }
+
+        .final-text {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            white-space: pre-line; /* Keeps your line breaks */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating" style="left: 5%; animation-duration: 7s;">🌿</div>
+    <div class="floating" style="left: 25%; animation-duration: 10s;">🌸</div>
+    <div class="floating" style="left: 75%; animation-duration: 9s;">✨</div>
+    <div class="floating" style="left: 90%; animation-duration: 14s;">🦋</div>
+
+    <div class="container" id="mainCard">
+        
+        <!-- LOGIN SECTION -->
+        <div id="loginSection">
+            <div style="font-size: 60px;">🐛</div>
+            <h1>Hey, You.</h1>
+            <p style="color: white; font-size: 0.9rem; margin-bottom: 20px;">What's your secret nickname?</p>
+            <div class="password-wrapper">
+                <input type="password" id="passInput" placeholder="Enter password...">
+                <span class="toggle-password" id="toggleBtn" onclick="toggleVisibility()">👁️</span>
+            </div>
+            <p id="errorMsg" class="error">Hint: I would love you even if you were a "it"...</p>
+            <button onclick="unlock()">Open Your Gift</button>
+        </div>
+
+        <!-- AUDIO MESSAGE SECTION -->
+        <div id="content">
+            <div style="font-size: 60px;">🦋</div>
+            <h1>Happy Birthday!</h1>
+            <div class="message-box">
+                "I know this is stupid, but how can I not do something for you on your birthday. And given our circumstances, I thought this would be a suitable option. Happy Birthday Shreya... I hope you like it."
+            </div>
+            <p style="color: white; font-weight: 600;">Listen to this:</p>
+            <audio id="audioPlayer" controls>
+                <source src="voice-message.mp3" type="audio/mpeg">
+            </audio>
+            <button class="btn-secondary" onclick="showPhotos()">Click Me →</button>
+            <p style="margin-top: 25px; color: white; font-size: 0.8rem;">❤️ The Audio was not just it ;)</p>
+        </div>
+
+        <!-- PHOTO GALLERY SECTION -->
+        <div id="photoSection">
+            <h1>Let me refresh your memory</h1>
+            <div class="photo-card">
+                <img src="photo1.jpg" alt="Memory 1">
+                <div class="caption">This was one of the first photos that you sent me, and then you sent more when I told you that is what I showed to at my house when I told them about you. lmao your reaction was very funny ❤️</div>
+            </div>
+            <div class="photo-card">
+                <img src="photo2.jpg" alt="Memory 2">
+                <div class="caption">This is one of the pictures I got obsessed with on sight and I still can't get over it! Definitely worth mentioning 🌸</div>
+            </div>
+            <div class="photo-card">
+                <img src="photo3.jpg" alt="Memory 3">
+                <div class="caption">This is the smile I wish to conquer the world for. ✨</div>
+            </div>
+            <button class="btn-secondary" onclick="showFinalMessage()">One Last Thing... →</button>
+        </div>
+
+        <!-- FINAL TYPED MESSAGE SECTION -->
+        <div id="finalMessage">
+            <h1>To Shreya,</h1>
+            <div class="message-box final-text">
+                There is so much more I want to say, and I know the blocking wont mean anything if keep doing something like this lol,
+                But IT'S YOUR BIRTHDAY, and you know how Expressive I can get. 
+
+                I just wish for you to be happy you tough brave soldier, and I am very excited for what comes next for you, good or not so good, I know you will handle it like a fucking badass.
+
+                I miss you and wish you a very happy birthday, and I hope you have a great day, and a great year ahead.
+                
+                [Yours truly] ❤️
+            </div>
+            <div style="font-size: 40px;">♾️</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility() {
+            const passInput = document.getElementById('passInput');
+            const toggleBtn = document.getElementById('toggleBtn');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        function unlock() {
+            const input = document.getElementById('passInput').value.toLowerCase().trim();
+            if (input === "caterpillar") {
+                document.getElementById('loginSection').style.display = "none";
+                document.getElementById('content').style.display = "block";
+                document.body.style.background = "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)";
+            } else {
+                const error = document.getElementById('errorMsg');
+                error.style.display = "block";
+                document.getElementById('mainCard').style.transform = "translateX(5px)";
+                setTimeout(() => document.getElementById('mainCard').style.transform = "translateX(-5px)", 100);
+                setTimeout(() => document.getElementById('mainCard').style.transform = "translateX(0)", 200);
+            }
+        }
+
+        function showPhotos() {
+            document.getElementById('content').style.display = "none";
+            document.getElementById('photoSection').style.display = "block";
+            document.getElementById('mainCard').classList.add('expanded');
+            document.body.style.overflow = "auto";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showFinalMessage() {
+            document.getElementById('photoSection').style.display = "none";
+            document.getElementById('finalMessage').style.display = "block";
+            // Shrink the card back down for a more intimate letter feel
+            document.getElementById('mainCard').classList.remove('expanded');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('passInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') unlock();
+        });
+    </script>
+</body>
+</html>
